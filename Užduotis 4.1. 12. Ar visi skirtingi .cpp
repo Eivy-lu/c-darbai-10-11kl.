@@ -2,17 +2,17 @@
 
 using namespace std;
 
-void skaitymas(int &n, int masyvas[]); ///f-jos prototipas
+void skaitymas(int &n, int masyvas[]);
 void rikiavimas(int &n, int masyvas[]);
 void spausdinimas(int &n, int masyvas[]);
 
 int main()
 {
     int masyvas[10];
-    int n; ///masyvo nariu skaicius
+    int n;
 
-    skaitymas(n, masyvas);  ///siunciam i funkcija
-    rikiavimas(n, masyvas); ///siunciam i funkcija rikiavimas
+    skaitymas(n, masyvas);
+    rikiavimas(n, masyvas);
     spausdinimas(n, masyvas);
 
     return 0;
