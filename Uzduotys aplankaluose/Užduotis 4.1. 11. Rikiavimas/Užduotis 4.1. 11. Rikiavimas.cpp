@@ -2,49 +2,66 @@
 
 using namespace std;
 
-void Rikiuoti(int A[], int n)
-{
-    int tarpinis;
-    for(int i = 1; i <= n - 1; i++)
-    {
-        for(int j = i + 1; j <= n; j++)
-        {
-            if(A[i] > A[j])
-            {
-                tarpinis = A[i];
-                A[i] = A[j];
-                A[j] = tarpinis;
-            }
-        }
-    }
-
-}
+void skaitymas(int &n, int masyvas[]); ///f-jos prototipas
+void rikiavimas(int &n, int masyvas[]);
+void spausdinimas(int &n, int masyvas[]);
 
 int main()
-
 {
-    int n;
-    int seka [15];
-    int didziausias = INT_MIN;
-    int netinka = 0;
-    int pozicija;
+    int masyvas[10];
+    int n; ///masyvo nariu skaicius
 
-    ifstream sk ("U1.txt");
-    sk >> n;
-
-    ofstream rez ("U1rez.txt");
-
-    for (int i = 0; i < n; i++)
-    {
-        sk >> seka [i];
-        Rikiuoti(seka, n);
-    }
-
-    rez << seka [0] ;
-    for (int i = 1; i < n; i++)
-    {
-        rez <<", "<< seka [i];
-    }
+    skaitymas(n, masyvas);
+    rikiavimas(n, masyvas);
+    spausdinimas(n, masyvas);
 
     return 0;
 }
+
+void spausdinimas(int &n, int masyvas[])
+{
+    ofstream fr("U1rez.txt");
+
+    for(int i = 0; i < n; i++)
+    {
+        if(i == 0)
+        {
+            fr << masyvas[i];
+        }
+        else
+        {
+            fr << "," << masyvas[i];
+        }
+    }
+
+    fr.close();
+}
+
+void rikiavimas(int &n, int masyvas[])
+{
+    for(int i = 0; i < n; i++)
+    {
+        for(int j = i+1; j < n; j++)
+        {
+            if(masyvas[i] > masyvas[j])
+            {
+                swap(masyvas[i], masyvas[j]);
+            }
+        }
+    }
+}
+
+void skaitymas(int &n, int masyvas[])
+{
+    ifstream fd("U1.txt");
+
+    fd >> n;
+
+    for(int i = 0; i < n; i++)
+    {
+        fd >> masyvas[i];
+    }
+
+    fd.close();
+}
+
