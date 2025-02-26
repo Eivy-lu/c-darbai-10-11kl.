@@ -15,14 +15,14 @@ int main()
 
     for (int i = 0; i < n; i++)
     {
-            fd >. seka [i];
+            fd >> seka [i];
     }
 
-    string ats = "NE"
+    string ats = "NE";
 
     for (int i = 0; i < n - 2; i++)
     {
-        if (sake [i] + 1 == seka [i + 1] && seka [i] + 2 == seka [i + 2])
+        if (seka [i] + 1 == seka [i + 1] && seka [i] + 2 == seka [i + 2])
         {
             ats = "TAIP";
         }
