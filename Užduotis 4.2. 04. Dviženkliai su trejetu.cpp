@@ -9,7 +9,6 @@ int skaiciavimas (vector<int> &skaiciai);
 int main()
 
 {
-    int n;
     vector<int> skaiciai;
 
     skaitymas (skaiciai);
@@ -21,10 +20,9 @@ int main()
 int skaiciavimas (vector<int> &skaiciai)
 {
     int kiekis = 0;
-
     for (auto m : skaiciai)
     {
-        if (m < 100 && m > 9 && m / 10 == 3)
+        if (m / 10 == 3)
         {
             kiekis ++;
         }
@@ -35,7 +33,6 @@ int skaiciavimas (vector<int> &skaiciai)
 void skaitymas (vector<int> &skaiciai)
 {
     int n;
-
     ifstream sk ("duom.txt");
     sk >> n;
 
@@ -47,14 +44,12 @@ void skaitymas (vector<int> &skaiciai)
 
         skaiciai.push_back(temp);
     }
-
 }
 
 void spausdinimas (vector<int> &skaiciai)
 {
     ofstream rez ("rez.txt");
 
-    rez << skaiciavimas (skaiciai);
-
+    rez << skaiciavimas(skaiciai);
 }
 
