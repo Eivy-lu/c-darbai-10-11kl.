@@ -23,18 +23,15 @@ int numeris(vector<int> arbuzai)
     vidurkis /= arbuzai.size();
 
     int nr = 0;
-    double skirtumas = INT_MAX; ///maksimalus int tipo kintamasis
 
-    for(int i = 0; i < arbuzai.size(); i++)
+    for(int i = 1; i < arbuzai.size(); i++)
     {
-        if(skirtumas > abs(vidurkis - arbuzai[i]))
+        if(abs(vidurkis - arbuzai[nr]) > abs(vidurkis - arbuzai[i]))
         {
-            skirtumas = abs(vidurkis - arbuzai[i]); ///saugomas skirtumas
-            nr = i + 1; ///saugomas numeris
+            nr = i;
         }
     }
-
-    return nr;
+    return nr + 1;
 }
 
 void spausdinimas(vector<int> arbuzai)
@@ -51,11 +48,10 @@ void skaitymas(vector<int> &arbuzai)
     int n;
     fin >> n;
 
+    arbuzai.resize(n);
+
     for(int i = 0; i < n; i++)
     {
-        int svoris;
-        fin >> svoris;
-
-        arbuzai.push_back(svoris);
+        fin >> arbuzai[i];
     }
 }
