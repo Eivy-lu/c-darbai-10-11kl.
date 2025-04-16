@@ -9,7 +9,7 @@ void spausdinimas(vector<int> &pataikymai, int &did);
 int main()
 
 {
-    vector <int> pataikymai(10);//nuo 0 iki 9
+    vector <int> pataikymai(10);// 0 --> 9
 
     skaitymas(pataikymai);
     int did = didziausias(pataikymai);
@@ -19,26 +19,26 @@ int main()
 }
 void skaitymas(vector<int> &pataikymai)
 {
-    int n;
     ifstream sk("duom.txt");
 
+    int n;
     sk >> n;
 
-    for (int i = 0; i < n; i++)
+    for(int i = 0; i < n; i++)
     {
-        int balas;
-        sk >> balas;
+        int suvis; //shot value
+        sk >> suvis;
 
-        pataikymai[balas]++; //masyvo narys padideja vienu
+        pataikymai[suvis]++;
     }
+
 }
 int didziausias(vector<int> &pataikymai)
 {
     int did = 0;
-
-    for (int i = 0; i < pataikymai.size(); i++)
+    for(int i = 0; i < pataikymai.size(); i++)
     {
-        if (did < pataikymai[i])
+        if (pataikymai[i] > did)
         {
             did = pataikymai[i];
         }
