@@ -27,9 +27,9 @@ void sprendimas(int &is_viso_dienu, int &baravykai, int &raudonvirsiai, double &
     int men, d, B, R;
     double g;
 
-    for(int i = 1; i < is_viso_dienu; i++)
+    for(int i = 1; i <= is_viso_dienu; i++)
     {
-        sk >> men >> d >> B >> R >> g;
+        sk >> men >> d >> g >> B >> R ;
 
         if(g > mase)
         {
@@ -52,7 +52,23 @@ void sprendimas(int &is_viso_dienu, int &baravykai, int &raudonvirsiai, double &
         }
 
     }
+
     rez <<"Derlingiausia diena: "<< mase_men <<" "<< mase_d <<endl;
-    rez <<"Derlingiausia baravyku diena: "<< baravyku_men <<" "<< baravyku_d <<endl;
-    rez <<"Derlingiausia raudonvirsiu diena: "<< raudonvirsiu_men <<" "<< raudonvirsiu_d <<endl;
+
+    if(baravykai == 0)
+    {
+        rez <<"Derlingiausia baravyku diena: nera" <<endl;
+    }
+    else
+    {
+        rez <<"Derlingiausia baravyku diena: "<< baravyku_men <<" "<< baravyku_d <<endl;
+    }
+    if(raudonvirsiai == 0)
+    {
+        rez <<"Derlingiausia raudonvirsiu diena: nera" <<endl;
+    }
+    else
+    {
+        rez <<"Derlingiausia raudonvirsiu diena: "<< raudonvirsiu_men <<" "<< raudonvirsiu_d <<endl;
+    }
 }
