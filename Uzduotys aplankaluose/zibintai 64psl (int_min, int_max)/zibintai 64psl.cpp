@@ -22,7 +22,7 @@ int main()
 void spausdinimas(vector<int> &zibintai, int &zibintu_sk, int &naktu_sk, int &daugiausiai_svies, int &maziausiai_svies)
 {
     ofstream rez("Rez.txt");
-    for(int i = 0; i < zibintu_sk; i++)
+    for(int i = 1; i <= zibintu_sk; i++)
     {
         rez << zibintai[i];
     }
@@ -34,7 +34,7 @@ void spausdinimas(vector<int> &zibintai, int &zibintu_sk, int &naktu_sk, int &da
 void sprendimas(vector<int> &zibintai, int &zibintu_sk, int &naktu_sk, int &daugiausiai_svies, int &maziausiai_svies)
 {
     int sviecia = 0;
-    for(int i = 0; i < naktu_sk; i++)
+    for(int i = 1; i <= naktu_sk; i++)
     {
         if(sviecia > daugiausiai_svies)
         {
@@ -46,14 +46,14 @@ void sprendimas(vector<int> &zibintai, int &zibintu_sk, int &naktu_sk, int &daug
         }
         //maziausiai ir saugiausiai svies
 
-        for(int j = 0; j < zibintu_sk; j++)
+        for(int j = 1; j <= zibintu_sk; j++)
         {
-            if(((j > 0) && (j < zibintu_sk - 1)) && ((zibintai[j - 1] == 1) && (zibintai[j + 1] == 1))) //pirma taisykle
+            if(((j > 1) && (j < zibintu_sk)) && ((zibintai[j - 1] == 1) && (zibintai[j + 1] == 1))) //pirma taisykle
             {
                 zibintai[j] = 0;
             }
 
-            else if(((j > 0) && (j < zibintu_sk - 1)) && ((zibintai[j - 1] == 1 && zibintai[j + 1] == 0) || (zibintai[j - 1] == 0 && zibintai[j + 1] == 1))) //antra taisykle
+            else if(((j > 1) && (j < zibintu_sk)) && ((zibintai[j - 1] == 1 && zibintai[j + 1] == 0) || (zibintai[j - 1] == 0 && zibintai[j + 1] == 1))) //antra taisykle
             {
                 zibintai[j] = 1;
                 sviecia++;
@@ -78,7 +78,7 @@ void skaitymas(vector<int> &zibintai, int &zibintu_sk, int &naktu_sk, int &daugi
     sk >> zibintu_sk >> naktu_sk;
     int temp; //temporary
 
-    for(int i = 0; i < zibintu_sk; i++)
+    for(int i = 1; i <= zibintu_sk; i++)
     {
         sk >> temp;
         zibintai.push_back(temp); //is temporary --> main
