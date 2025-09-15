@@ -26,9 +26,8 @@ void spausdinimas(vector<int> &zibintai, int &zibintu_sk, int &naktu_sk, int &da
     {
         rez << zibintai[i];
     }
-
     rez <<endl<<"Naktis, kai sviete daugiausiai: "<< daugiausiai_svies <<endl;
-    rez <<"Naktis, kai sviete maziausiai: "<< maziausiai_svies<<endl;
+    rez <<"Naktis, kai sviete maziausiai: "<< maziausiai_svies <<endl;
 }
 
 void sprendimas(vector<int> &zibintai, int &zibintu_sk, int &naktu_sk, int &daugiausiai_svies, int &maziausiai_svies)
@@ -48,18 +47,21 @@ void sprendimas(vector<int> &zibintai, int &zibintu_sk, int &naktu_sk, int &daug
 
         for(int j = 1; j <= zibintu_sk; j++)
         {
-            if(((j > 1) && (j < zibintu_sk)) && ((zibintai[j - 1] == 1) && (zibintai[j + 1] == 1))) //pirma taisykle
+            //pirma taisykle
+            if(((j > 1) && (j < zibintu_sk)) && ((zibintai[j - 1] == 1) && (zibintai[j + 1] == 1)))
             {
                 zibintai[j] = 0;
             }
 
-            else if(((j > 1) && (j < zibintu_sk)) && ((zibintai[j - 1] == 1 && zibintai[j + 1] == 0) || (zibintai[j - 1] == 0 && zibintai[j + 1] == 1))) //antra taisykle
+            //antra taisykle
+            else if(((j > 1) && (j < zibintu_sk)) && ((zibintai[j - 1] == 1 && zibintai[j + 1] == 0) || (zibintai[j - 1] == 0 && zibintai[j + 1] == 1)))
             {
                 zibintai[j] = 1;
                 sviecia++;
             }
 
-            else if(i % 2 == 0) //trecia taisykle
+            //trecia taisykle
+            else if(i % 2 == 0)
             {
                 zibintai[j] = 1;
                 sviecia++;
