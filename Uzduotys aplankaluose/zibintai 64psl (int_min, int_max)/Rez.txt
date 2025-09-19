@@ -1,3 +1,2 @@
-110111
-Naktis, kai sviete daugiausiai: 2
-Naktis, kai sviete maziausiai: 1
+110101
+ Naktis, kai sviete daugiausiai: 1 Naktis, kai sviete maziausiai: 1

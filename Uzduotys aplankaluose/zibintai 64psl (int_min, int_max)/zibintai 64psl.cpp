@@ -1,88 +1,110 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-void skaitymas(vector<int> &zibintai, int &zibintu_sk, int &naktu_sk, int &daugiausiai_svies, int &maziausiai_svies);
-void sprendimas(vector<int> &zibintai, int &zibintu_sk, int &naktu_sk, int &daugiausiai_svies, int &maziausiai_svies);
-void spausdinimas(vector<int> &zibintai, int &zibintu_sk, int &naktu_sk, int &daugiausiai_svies, int &maziausiai_svies);
+void skaitymas(vector<int> &zibintai, int &zibintu_sk, int &naktys);
+void sprendimas(vector<int> &zibintai, int &zibintu_sk, int &naktys);
 
 int main()
 {
     int zibintu_sk;
-    int naktu_sk;
-    int daugiausiai_svies = INT_MIN;
-    int maziausiai_svies = INT_MAX;
+    int naktys;
     vector<int> zibintai;
 
-    skaitymas(zibintai, zibintu_sk, naktu_sk, daugiausiai_svies, maziausiai_svies);
-    sprendimas(zibintai, zibintu_sk, naktu_sk, daugiausiai_svies, maziausiai_svies);
-    spausdinimas(zibintai, zibintu_sk, naktu_sk, daugiausiai_svies, maziausiai_svies);
+    skaitymas(zibintai, zibintu_sk, naktys);
+    sprendimas(zibintai, zibintu_sk, naktys);
 
     return 0;
 }
-void spausdinimas(vector<int> &zibintai, int &zibintu_sk, int &naktu_sk, int &daugiausiai_svies, int &maziausiai_svies)
+void sprendimas(vector<int> &zibintai, int &zibintu_sk, int &naktys)
 {
-    ofstream rez("Rez.txt");
-    for(int i = 1; i <= zibintu_sk; i++)
+    int sviecia = INT_MIN;
+    int nesviecia = INT_MIN;
+    int naktis_daugiausiai;
+    int naktis_maziausiai;
+    int svies_max = 0;
+    int svies_min = 0;
+    for(int j  = 0; j < naktys; j++)
     {
-        rez << zibintai[i];
-    }
-    rez <<endl<<"Naktis, kai sviete daugiausiai: "<< daugiausiai_svies <<endl;
-    rez <<"Naktis, kai sviete maziausiai: "<< maziausiai_svies <<endl;
-}
-
-void sprendimas(vector<int> &zibintai, int &zibintu_sk, int &naktu_sk, int &daugiausiai_svies, int &maziausiai_svies)
-{
-    int sviecia = 0;
-    for(int i = 1; i <= naktu_sk; i++)
-    {
-        if(sviecia > daugiausiai_svies)
+        svies_max = 0;
+        svies_min = 0;
+        for(int i = 0; i < zibintu_sk; i++)
         {
-            daugiausiai_svies = i;
-        }
-        if(sviecia < maziausiai_svies)
-        {
-            maziausiai_svies = i;
-        }
-        //maziausiai ir saugiausiai svies
-
-        for(int j = 1; j <= zibintu_sk; j++)
-        {
-            //pirma taisykle
-            if(((j > 1) && (j < zibintu_sk)) && ((zibintai[j - 1] == 1) && (zibintai[j + 1] == 1)))
+            //krastus tikrina
+            if (i == 0)
             {
-                zibintai[j] = 0;
+                if (naktys % 2 == 0)
+                {
+                    zibintai[i] = 1;
+                    svies_max++;
+                }
+                else if (naktys % 2 != 0)
+                {
+                    zibintai[i] = 0;
+                    svies_min++;
+                }
+            }
+
+            else if (i == zibintu_sk - 1)
+            {
+                if (naktys % 2 == 0)
+                {
+                    zibintai[i] = 1;
+                    svies_max++;
+                }
+                else if (naktys % 2 != 0)
+                {
+                    zibintai[i] = 0;
+                    svies_min++;
+                }
+            }
+
+            //pirma taisykle
+            else if(zibintai[i - 1] == 1 && zibintai[i + 1] == 1)
+            {
+                zibintai[i] = 0;
+                svies_min++;
             }
 
             //antra taisykle
-            else if(((j > 1) && (j < zibintu_sk)) && ((zibintai[j - 1] == 1 && zibintai[j + 1] == 0) || (zibintai[j - 1] == 0 && zibintai[j + 1] == 1)))
+            else if((zibintai[i - 1] == 0 && zibintai[i + 1] == 1) || (zibintai[i - 1] == 1 && zibintai[i + 1] == 0))
             {
-                zibintai[j] = 1;
-                sviecia++;
-            }
-
-            //trecia taisykle
-            else if(i % 2 == 0)
-            {
-                zibintai[j] = 1;
-                sviecia++;
-            }
-            else if(i % 2 == 1)
-            {
-                zibintai[j] = 0;
+                zibintai[i] = 1;
+                svies_max++;
             }
         }
+
+        if (svies_max > sviecia)
+        {
+            sviecia == svies_max;
+            naktis_daugiausiai = j;
+        }
+        if (svies_min > nesviecia)
+        {
+            nesviecia == svies_min;
+            naktis_maziausiai = j;
+        }
     }
+
+    ofstream rez("Rez.txt");
+
+    for(int i = 0; i < zibintu_sk; i++)
+    {
+        rez << zibintai[i];
+    }
+
+    rez << endl <<" Naktis, kai sviete daugiausiai: "<< naktis_daugiausiai << endl;
+    rez <<" Naktis, kai sviete maziausiai: "<< naktis_maziausiai << endl;
 }
 
-void skaitymas(vector<int> &zibintai, int &zibintu_sk, int &naktu_sk, int &daugiausiai_svies, int &maziausiai_svies)
+void skaitymas(vector<int> &zibintai, int &zibintu_sk, int &naktys)
 {
     ifstream sk("Duom.txt");
-    sk >> zibintu_sk >> naktu_sk;
-    int temp; //temporary
+    sk >> zibintu_sk >> naktys;
 
-    for(int i = 1; i <= zibintu_sk; i++)
+    for(int i = 0; i < zibintu_sk; i++)
     {
+        int temp; //laikinas
         sk >> temp;
-        zibintai.push_back(temp); //is temporary --> main
+        zibintai.push_back(temp);
     }
 }
