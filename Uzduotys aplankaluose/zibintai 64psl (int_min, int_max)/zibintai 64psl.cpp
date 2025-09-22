@@ -23,6 +23,7 @@ void sprendimas(vector<int> &zibintai, int &zibintu_sk, int &naktys)
     int naktis_maziausiai;
     int svies_max = 0;
     int svies_min = 0;
+
     for(int j  = 0; j < naktys; j++)
     {
         svies_max = 0;
@@ -86,7 +87,6 @@ void sprendimas(vector<int> &zibintai, int &zibintu_sk, int &naktys)
     }
 
     ofstream rez("Rez.txt");
-
     for(int i = 0; i < zibintu_sk; i++)
     {
         rez << zibintai[i];
