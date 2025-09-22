@@ -59,7 +59,6 @@ void sprendimas(vector<int> prekes, int visi_pinigai, int lentynu_sk, vector<int
             }
         }
 
-
         if (brangiausios_indeksas != -1)
         {
             visi_pinigai -= brangiausia;
@@ -67,7 +66,6 @@ void sprendimas(vector<int> prekes, int visi_pinigai, int lentynu_sk, vector<int
             nusipirktos_prekes++;
         }
     }
-
     pinigai_liko = visi_pinigai;
 }
 
