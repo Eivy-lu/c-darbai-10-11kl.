@@ -74,3 +74,19 @@ void spausdinimas(int &pirkiniu_sk, int &pinigai_liko)
     ofstream rez("rez.txt");
     rez << pirkiniu_sk << " " << pinigai_liko << endl;
 }
+/*
+1000 4
+3 15 360 8
+5 2 1 145 99 300
+4 700 600 900 800
+2 8 1
+
+5 3
+2 5 6
+1 14
+3 5 6 8
+
+*/
+
+
+
