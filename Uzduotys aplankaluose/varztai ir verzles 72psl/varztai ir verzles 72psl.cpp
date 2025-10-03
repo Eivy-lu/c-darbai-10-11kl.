@@ -12,65 +12,86 @@ int main()
     ofstream rez("Rez.txt");
 
     sk >> varztu_sk;
-    for(int i = 0; i < varztu_sk; i++)
+    for (int i = 0; i < varztu_sk; i++)
     {
         int temp;
-        sk >>temp;
+        sk >> temp;
         varztai.push_back(temp);
     }
 
     sk >> verzliu_sk;
-    for(int i = 0; i < verzliu_sk; i++)
+    for (int i = 0; i < verzliu_sk; i++)
     {
         int temp;
-        sk >>temp;
+        sk >> temp;
         verzles.push_back(temp);
     }
 
-    for(int i = 0; i < varztu_sk; i++)
+    int varztu_kiekis[21] = {0};
+    int verzliu_kiekis[21] = {0};
+
+    for (int i = 0; i < varztai.size(); i++)
     {
-        for(int j = 0; j < verzliu_sk; j++)
+        varztu_kiekis[varztai[i]]++;
+    }
+
+    for (int i = 0; i < verzles.size(); i++)
+    {
+        verzliu_kiekis[verzles[i]]++;
+    }
+
+    bool reikia_varztu = false;
+    bool reikia_verzliu = false;
+
+
+    for (int i = 2; i <= 20; i++)
+    {
+        if (verzliu_kiekis[i] > varztu_kiekis[i])
         {
-            if(varztai[i] == verzles[j])
-            {
-                varztai.erase(varztai.begin() + i);
-                verzles.erase(verzles.begin() + j);
-            }
+            reikia_varztu = true;
+            break;
         }
     }
 
-    int kiekis_varztu = 0;
-    rez <<"Reikalingi varztai: "<< endl;
-
-    for(int i = 2; i <= 20; i++)
+    if (reikia_varztu)
     {
-        int skaicius;
-        for(int j = 0; j < varztu_sk; j++)
+        rez << "Reikalingi varztai:" << endl;
+        for (int i = 2; i <= 20; i++)
         {
-            skaicius = varztai[i];
-            if(skaicius == varztai[i+1])
+            if (verzliu_kiekis[i] > varztu_kiekis[i])
             {
-                kiekis_varztu++;
+                rez << (verzliu_kiekis[i] - varztu_kiekis[i]) << " " << i << endl;
             }
         }
-        rez << kiekis_varztu <<" "<< skaicius << endl;
+    }
+    else
+    {
+        rez << "Varztu nereikia" << endl;
     }
 
-    int kiekis_verzliu = 0;
-    rez <<"Reikalingos verzles: "<< endl;
-
-    for(int i = 2; i <= 20; i++)
+    for (int i = 2; i <= 20; i++)
     {
-        int skaicius;
-        for(int j = 0; j < verzliu_sk; j++)
+        if (varztu_kiekis[i] > verzliu_kiekis[i])
         {
-            skaicius = verzles[i];
-            if(skaicius == verzles[i+1])
+            reikia_verzliu = true;
+            break;
+        }
+    }
+
+    if (reikia_verzliu)
+    {
+        rez << "Reikalingos verzles:" << endl;
+        for (int i = 2; i <= 20; i++)
+        {
+            if (varztu_kiekis[i] > verzliu_kiekis[i])
             {
-                kiekis_verzliu++;
+                rez << (varztu_kiekis[i] - verzliu_kiekis[i]) << " " << i << endl;
             }
         }
-        rez << kiekis_verzliu <<" "<< skaicius <<endl;
+    }
+    else
+    {
+        rez << "Verzliu nereikia" << endl;
     }
 
     return 0;
