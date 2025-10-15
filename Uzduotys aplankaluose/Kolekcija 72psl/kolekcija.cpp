@@ -5,6 +5,10 @@
 
 using namespace std;
 
+void skaitymas(int &Ausra_Turi, int &Ruta_Turi, vector<int> &Ausros_Kolekcija, vector<int> &Rutos_Kolekcija);
+void sprendimas(int &Ausra_Turi, int &Ruta_Turi, vector<int> &Ausros_Kolekcija, vector<int> &Rutos_Kolekcija, vector<int> &Pasikartoja, vector<int> &Pasiulymai);
+void spausdinimas(int &Ausra_Turi, int &Ruta_Turi, vector<int> &Ausros_Kolekcija, vector<int> &Rutos_Kolekcija, vector<int> &Pasikartoja, vector<int> &Pasiulymai);
+
 int main()
 {
     int Ausra_Turi;
@@ -14,8 +18,16 @@ int main()
     vector<int> Pasikartoja;
     vector<int> Pasiulymai;
 
+    skaitymas(Ausra_Turi, Ruta_Turi, Ausros_Kolekcija, Rutos_Kolekcija);
+    sprendimas(Ausra_Turi, Ruta_Turi, Ausros_Kolekcija, Rutos_Kolekcija, Pasikartoja, Pasiulymai);
+    spausdinimas(Ausra_Turi, Ruta_Turi, Ausros_Kolekcija, Rutos_Kolekcija, Pasikartoja, Pasiulymai);
+
+    return 0;
+}
+
+void skaitymas(int &Ausra_Turi, int &Ruta_Turi, vector<int> &Ausros_Kolekcija, vector<int> &Rutos_Kolekcija)
+{
     ifstream sk("Duom.txt");
-    ofstream rez("Rez.txt");
 
     sk >> Ausra_Turi;
     for (int i = 0; i < Ausra_Turi; i++)
@@ -32,7 +44,9 @@ int main()
         sk >> skaicius;
         Rutos_Kolekcija.push_back(skaicius);
     }
-
+}
+void sprendimas(int &Ausra_Turi, int &Ruta_Turi, vector<int> &Ausros_Kolekcija, vector<int> &Rutos_Kolekcija, vector<int> &Pasikartoja, vector<int> &Pasiulymai)
+{
     for (int i = 0; i < Ausros_Kolekcija.size(); i++)
     {
         int kiek = 1;
@@ -58,15 +72,20 @@ int main()
                 break;
             }
         }
-        if (!RutosTuri)
+        if (RutosTuri == false)
         {
             Pasiulymai.push_back(Pasikartoja[i]);
         }
     }
 
+}
+void spausdinimas(int &Ausra_Turi, int &Ruta_Turi, vector<int> &Ausros_Kolekcija, vector<int> &Rutos_Kolekcija, vector<int> &Pasikartoja, vector<int> &Pasiulymai)
+{
+    ofstream rez("Rez.txt");
+
     if (Pasiulymai.size() == 0)
     {
-        rez << "nera";
+        rez << "Nera";
     }
     else
     {
@@ -75,6 +94,4 @@ int main()
             rez << Pasiulymai[i] << " ";
         }
     }
-
-    return 0;
 }
