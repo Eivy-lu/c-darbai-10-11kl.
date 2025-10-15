@@ -1,4 +1,8 @@
-#include <bits/stdc++.h>
+#include <iostream>
+#include <fstream>
+#include <vector>
+#include <algorithm>
+
 using namespace std;
 
 int main()
@@ -7,95 +11,70 @@ int main()
     int Ruta_Turi;
     vector<int> Ausros_Kolekcija;
     vector<int> Rutos_Kolekcija;
-    vector<int> Ausros_Atiduodami;
+    vector<int> Pasikartoja;
+    vector<int> Pasiulymai;
 
     ifstream sk("Duom.txt");
     ofstream rez("Rez.txt");
 
     sk >> Ausra_Turi;
-    for(int i = 0; i < Ausra_Turi; i ++)
+    for (int i = 0; i < Ausra_Turi; i++)
     {
-        int temp;
-        sk >> temp;
-        Ausros_Kolekcija.push_back(temp);
+        int skaicius;
+        sk >> skaicius;
+        Ausros_Kolekcija.push_back(skaicius);
     }
 
     sk >> Ruta_Turi;
-    for(int i = 0; i < Ruta_Turi; i ++)
+    for (int i = 0; i < Ruta_Turi; i++)
     {
-        int temp;
-        sk >> temp;
-        Rutos_Kolekcija.push_back(temp);
+        int skaicius;
+        sk >> skaicius;
+        Rutos_Kolekcija.push_back(skaicius);
     }
 
-    for(int i = 0; i < Ausros_Kolekcija.size(); i++)
+    for (int i = 0; i < Ausros_Kolekcija.size(); i++)
     {
-        for(int j = i + 1; j < Ausros_Kolekcija.size(); j++)
+        int kiek = 1;
+        while (i + 1 < Ausros_Kolekcija.size() && Ausros_Kolekcija[i] == Ausros_Kolekcija[i + 1])
         {
-            int temp = 0;
-            if(Ausros_Kolekcija[i] == Ausros_Kolekcija[j])
+            kiek++;
+            i++;
+        }
+        if (kiek > 1)
+        {
+            Pasikartoja.push_back(Ausros_Kolekcija[i]);
+        }
+    }
+
+    for (int i = 0; i < Pasikartoja.size(); i++)
+    {
+        bool RutosTuri = false;
+        for (int j = 0; j < Rutos_Kolekcija.size(); j++)
+        {
+            if (Pasikartoja[i] == Rutos_Kolekcija[j])
             {
-                Ausros_Kolekcija.erase(Ausros_Kolekcija.begin() + i);
-                for(int k = 0; k < Ausros_Atiduodami.size(); k++)
-                {
-                    for(int m = 0; m < Ausros_Atiduodami.size(); m++)
-                    {
-                        if(Ausros_Kolekcija[i] == Ausros_Atiduodami[m])
-                        {
-                            break;
-                        }
-                        else
-                        {
-                            temp = Ausros_Kolekcija[i];
-                            Ausros_Atiduodami.push_back(temp);
-                        }
-                    }
-
-                }
+                RutosTuri = true;
+                break;
             }
-            --i;
-            --j;
-            break;
         }
-    }
-}
-
-///nieko nereiskia
-/*for(int i = 0; i < Rutos_Kolekcija.size(); i++)
-{
-    for(int j = i + 1; j < Rutos_Kolekcija.size(); j++)
-    {
-        if(Rutos_Kolekcija[i] == Rutos_Kolekcija[j])
+        if (!RutosTuri)
         {
-            Rutos_Kolekcija.erase(Rutos_Kolekcija.begin() + i);
-
-            --i;
-            --j;
-            break;
+            Pasiulymai.push_back(Pasikartoja[i]);
         }
     }
-}*/
 
-for(int i = 0; i < Ausros_Atiduodami.size(); i++)
-{
-    for(int j = 0; j < Rutos_Kolekcija.size(); j++)
+    if (Pasiulymai.size() == 0)
     {
-        if(Ausros_Atiduodami[i] == Rutos_Kolekcija[j])
+        rez << "nera";
+    }
+    else
+    {
+        for (int i = 0; i < Pasiulymai.size(); i++)
         {
-            Ausros_Atiduodami.erase(Ausros_Atiduodami.begin() + i);
-            Rutos_Kolekcija.erase(Rutos_Kolekcija.begin() + j);
-
-            --i;
-            --j;
-            break;
+            rez << Pasiulymai[i] << " ";
         }
     }
-}
 
-for(int i = 0; i < Ausros_Atiduodami.size(); i++)
-{
-    rez << Ausros_Atiduodami[i]<<" ";
-}
-
-return 0;
+    return 0;
 }
