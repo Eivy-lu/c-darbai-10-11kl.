@@ -13,6 +13,7 @@ int main()
 {
     int Ausra_Turi;
     int Ruta_Turi;
+
     vector<int> Ausros_Kolekcija;
     vector<int> Rutos_Kolekcija;
     vector<int> Pasikartoja;
@@ -30,7 +31,7 @@ void skaitymas(int &Ausra_Turi, int &Ruta_Turi, vector<int> &Ausros_Kolekcija, v
     ifstream sk("Duom.txt");
 
     sk >> Ausra_Turi;
-    for (int i = 0; i < Ausra_Turi; i++)
+    for(int i = 0; i < Ausra_Turi; i++)
     {
         int skaicius;
         sk >> skaicius;
@@ -38,7 +39,7 @@ void skaitymas(int &Ausra_Turi, int &Ruta_Turi, vector<int> &Ausros_Kolekcija, v
     }
 
     sk >> Ruta_Turi;
-    for (int i = 0; i < Ruta_Turi; i++)
+    for(int i = 0; i < Ruta_Turi; i++)
     {
         int skaicius;
         sk >> skaicius;
@@ -47,10 +48,10 @@ void skaitymas(int &Ausra_Turi, int &Ruta_Turi, vector<int> &Ausros_Kolekcija, v
 }
 void sprendimas(int &Ausra_Turi, int &Ruta_Turi, vector<int> &Ausros_Kolekcija, vector<int> &Rutos_Kolekcija, vector<int> &Pasikartoja, vector<int> &Pasiulymai)
 {
-    for (int i = 0; i < Ausros_Kolekcija.size(); i++)
+    for(int i = 0; i < Ausros_Kolekcija.size(); i++)
     {
         int kiek = 1;
-        while (i + 1 < Ausros_Kolekcija.size() && Ausros_Kolekcija[i] == Ausros_Kolekcija[i + 1])
+        while(i + 1 < Ausros_Kolekcija.size() && Ausros_Kolekcija[i] == Ausros_Kolekcija[i + 1])
         {
             kiek++;
             i++;
@@ -61,35 +62,34 @@ void sprendimas(int &Ausra_Turi, int &Ruta_Turi, vector<int> &Ausros_Kolekcija, 
         }
     }
 
-    for (int i = 0; i < Pasikartoja.size(); i++)
+    for(int i = 0; i < Pasikartoja.size(); i++)
     {
         bool RutosTuri = false;
-        for (int j = 0; j < Rutos_Kolekcija.size(); j++)
+        for(int j = 0; j < Rutos_Kolekcija.size(); j++)
         {
-            if (Pasikartoja[i] == Rutos_Kolekcija[j])
+            if(Pasikartoja[i] == Rutos_Kolekcija[j])
             {
                 RutosTuri = true;
                 break;
             }
         }
-        if (RutosTuri == false)
+        if(RutosTuri == false)
         {
             Pasiulymai.push_back(Pasikartoja[i]);
         }
     }
-
 }
 void spausdinimas(int &Ausra_Turi, int &Ruta_Turi, vector<int> &Ausros_Kolekcija, vector<int> &Rutos_Kolekcija, vector<int> &Pasikartoja, vector<int> &Pasiulymai)
 {
     ofstream rez("Rez.txt");
 
-    if (Pasiulymai.size() == 0)
+    if(Pasiulymai.size() == 0)
     {
         rez << "Nera";
     }
     else
     {
-        for (int i = 0; i < Pasiulymai.size(); i++)
+        for(int i = 0; i < Pasiulymai.size(); i++)
         {
             rez << Pasiulymai[i] << " ";
         }
