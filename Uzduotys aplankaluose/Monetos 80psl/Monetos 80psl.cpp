@@ -34,9 +34,17 @@ void sprendimas(int &A_kiekis, int &B_kiekis, vector<int> &A, vector<int> &B)
     {
         for(int j = 0; j < B_kiekis; j++)
         {
-            if(B[j] <= A[i])
+            A.push_back(B[j]);
+        }
+    }
+
+    for(int i = 0; i < (A_kiekis + B_kiekis); i++)
+    {
+        for(int j = i+1; j < (A_kiekis + B_kiekis); j++)
+        {
+            if(A[i] > A[j])
             {
-                A.push_back(B[j]);
+                swap(A[i], A[j]);
             }
         }
     }
